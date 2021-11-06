@@ -1,0 +1,83 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(p8105.datasets)
+library(tidyverse)
+library(plotly)
+data("instacart")
+```
+        
+Column {data-width=650}    
+-----------------------------------------------------------------------
+### Plot 1: The total number of each type product in fresh vegetables 
+
+```{r,echo=FALSE}
+bar <- 
+  instacart %>%
+	filter(aisle == "fresh vegetables") %>% 
+  count(product_name) %>%
+  filter(n > 100)  %>%
+  mutate(
+    aisle = factor(product_name),
+    aisle = fct_reorder(product_name, n)) %>%
+  plot_ly(
+    x = ~aisle, y = ~n, type = "bar",colors = "viridis",color = ~aisle, alpha = 0.5) %>% 
+  layout(
+    xaxis = list(title = FALSE),
+    yaxis = list(title = "Count"))
+bar
+```
+
+Column {data-width=450}       
+-----------------------------------------------------------------------
+     
+### Plot 2: The distribution between hour and order of top 5 fresh fruits  
+
+```{r,echo=FALSE}
+box_df <- 
+  instacart %>%
+  filter(aisle == "fresh fruits") %>% 
+  count(product_name) %>%
+  filter(n>50) %>%
+  mutate(rank = min_rank(desc(n)))%>% 
+  filter(rank < 6)
+
+box <-
+  instacart %>%
+  filter(product_name %in% box_df$product_name) %>%
+  plot_ly(
+    x = ~product_name, y = ~order_hour_of_day,  color = ~product_name, 
+    type = "box", colors = "viridis") %>%
+  layout(
+    xaxis = list(title = FALSE),
+    yaxis = list(title = "Order-hour of the day"))
+box
+```
+
+
+### Plot 3: The most popular items in each aisle with their total number of ordered times 
+
+```{r,echo=FALSE}
+scatter <-
+  instacart %>% 
+  group_by(aisle) %>% 
+  count(product_name) %>%
+  filter(n < 3500) %>%
+  mutate(rank = min_rank(desc(n))) %>% 
+  filter(rank <2) %>% 
+  arrange(desc(n)) %>%
+  plot_ly(
+    x = ~product_name, y = ~n, color = ~aisle,
+    type = "scatter", colors = "viridis", mode = "markers") %>% 
+  layout(
+    xaxis = list(title = FALSE),
+    yaxis = list(title = "Count"))
+scatter
+```

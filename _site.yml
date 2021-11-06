@@ -1,0 +1,18 @@
+name: "Yay internet!"
+output_dir: "."
+navbar:
+  title: "Huijun Xiao"
+  right:
+    - text: "About Me"
+      href: about.html
+    - text: "Plotly"
+      href: plotly.html
+    - text: "Dashboard"
+      href: dashboard.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<hx2306@cumc.columbia.com>
+    - icon: fa-github fa-lg
+      href: http://github.com/Clairexiao1/
+output:
+  html_document:
+    theme: paper

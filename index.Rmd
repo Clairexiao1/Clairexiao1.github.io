@@ -1,12 +1,32 @@
 ---
-title: "P8105_HW4_hx2306"
-author: "HuijunXiao"
-date: "11/5/2021"
-output: html_document
+title: "Hello!This is Claire's Website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: paper
 ---
+<div style="margin-bottom:30px;">
+</div>  
 
-```{r setup, include=FALSE}
+Hello! Welcome to my website!    
+You will meet my cat Salmon at first and then see a brief intro about me!      
+![](https://media.giphy.com/media/2nUjpQOJRYY5rC0kUw/giphy.gif)
 
-```
+## Meet Salmon    
 
+This is my cat Salmon. He is about three years old now. I adopted him at a humane society in Madison, Wisconsin before.   
 
+<div style="margin-bottom:30px;">
+</div>
+
+<img src="image/salmon.JPG" style="width:30%">
+
+<div style="margin-bottom:30px;">
+</div>
+     
+## About Me     
+I received a BS in Bioengineering from University of Wisconsin - Madison in 2020.      
+Currently, I am a second-year MS Biostatistics student in Columbia University. 
+
+* [About Me](about.html)
